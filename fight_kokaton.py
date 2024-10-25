@@ -139,6 +139,31 @@ class Bomb:
         self.rct.move_ip(self.vx, self.vy)
         screen.blit(self.img, self.rct)
 
+class Score:
+    """
+    スコアに関するクラス
+    """
+    def __init__(self):
+        """
+        文字列Surfaceを生成する
+        """
+        self.fonto = pg.font.SysFont("hgp創英角ポップ体",30)
+        self.coler=(0,0,255)
+        self.score=0
+        self.img = self.fonto.render(f"{self.score}",0,self.coler)
+        self.center=(100,HEIGHT-50)
+
+    def update(self,screen:pg.surface,get=0):
+        """
+        現在のスコアを生成
+        引数 screen：画面Surface
+        """
+        self.score+=get
+        self.img=self.fonto.render(f"{self.score}",0,self.coler)
+        self.rct=self.img.get_rect()
+        self.rct.center=(self.center)
+        screen.blit(self.img,self.rct)
+
 
 def main():
     pg.display.set_caption("たたかえ！こうかとん")
@@ -147,6 +172,7 @@ def main():
     bird = Bird((300, 200))
     bomb = Bomb((255, 0, 0), 10)
     clock = pg.time.Clock()
+    score = Score()
     tmr = 0
     while True:
         for event in pg.event.get():
