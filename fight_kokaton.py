@@ -194,6 +194,7 @@ def main():
         bird.update(key_lst, screen)
         # beam.update(screen)   
         bomb.update(screen)
+        score.update(screen)
         pg.display.update()
         tmr += 1
         clock.tick(50)
